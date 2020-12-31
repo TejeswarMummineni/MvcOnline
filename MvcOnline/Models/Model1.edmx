@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MphasisOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="feedback">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="varchar" MaxLength="20" />
+          <Property Name="pttitle" Type="varchar" MaxLength="20" />
+          <Property Name="pdescription" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="pcode" />
+          </Key>
+          <Property Name="pcode" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="pname" Type="varchar" MaxLength="30" />
+          <Property Name="desc" Type="varchar" MaxLength="100" />
+          <Property Name="price" Type="int" />
+          <Property Name="pimage" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="gender" Type="bit" />
+          <Property Name="phNo" Type="varchar" MaxLength="30" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="pwd" Type="varchar" MaxLength="20" />
+          <Property Name="dob" Type="date" />
+        </EntityType>
+        <EntityType Name="transactioninfo">
+          <Key>
+            <PropertyRef Name="transactionid" />
+          </Key>
+          <Property Name="transactionid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="20" />
+          <Property Name="pcode" Type="varchar" MaxLength="5" />
+          <Property Name="qty" Type="int" />
+          <Property Name="orderdate" Type="datetime" />
+          <Property Name="TotalPrice" Type="int" />
+        </EntityType>
+        <Association Name="FK__feedback__userid__04E4BC85">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="0..1" />
+          <End Role="feedback" Type="Self.feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="feedback">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacti__pcode__60A75C0F">
+          <End Role="products" Type="Self.products" Multiplicity="0..1" />
+          <End Role="transactioninfo" Type="Self.transactioninfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="pcode" />
+            </Principal>
+            <Dependent Role="transactioninfo">
+              <PropertyRef Name="pcode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transacti__usern__5FB337D6">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="0..1" />
+          <End Role="transactioninfo" Type="Self.transactioninfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="transactioninfo">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MphasisOnlineModelStoreContainer">
+          <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transactioninfo" EntityType="Self.transactioninfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__feedback__userid__04E4BC85" Association="Self.FK__feedback__userid__04E4BC85">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="feedback" EntitySet="feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacti__pcode__60A75C0F" Association="Self.FK__transacti__pcode__60A75C0F">
+            <End Role="products" EntitySet="products" />
+            <End Role="transactioninfo" EntitySet="transactioninfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transacti__usern__5FB337D6" Association="Self.FK__transacti__usern__5FB337D6">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="transactioninfo" EntitySet="transactioninfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MphasisOnlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="pcode" />
+          </Key>
+          <Property Name="pcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="pimage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="transactioninfoes" Relationship="Self.FK__transacti__pcode__60A75C0F" FromRole="products" ToRole="transactioninfo" />
+        </EntityType>
+        <EntityType Name="transactioninfo">
+          <Key>
+            <PropertyRef Name="transactionid" />
+          </Key>
+          <Property Name="transactionid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="qty" Type="Int32" />
+          <Property Name="orderdate" Type="DateTime" Precision="3" />
+          <Property Name="TotalPrice" Type="Int32" />
+          <NavigationProperty Name="product" Relationship="Self.FK__transacti__pcode__60A75C0F" FromRole="transactioninfo" ToRole="products" />
+          <NavigationProperty Name="Registration" Relationship="MphasisOnlineModel.FK__transacti__usern__5FB337D6" FromRole="transactioninfo" ToRole="Registration" />
+        </EntityType>
+        <Association Name="FK__transacti__pcode__60A75C0F">
+          <End Role="products" Type="Self.product" Multiplicity="0..1" />
+          <End Role="transactioninfo" Type="Self.transactioninfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="pcode" />
+            </Principal>
+            <Dependent Role="transactioninfo">
+              <PropertyRef Name="pcode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MphasisOnlineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="transactioninfoes" EntityType="Self.transactioninfo" />
+          <AssociationSet Name="FK__transacti__pcode__60A75C0F" Association="Self.FK__transacti__pcode__60A75C0F">
+            <End Role="products" EntitySet="products" />
+            <End Role="transactioninfo" EntitySet="transactioninfoes" />
+          </AssociationSet>
+          <EntitySet Name="Registrations" EntityType="MphasisOnlineModel.Registration" />
+          <AssociationSet Name="FK__transacti__usern__5FB337D6" Association="MphasisOnlineModel.FK__transacti__usern__5FB337D6">
+            <End Role="Registration" EntitySet="Registrations" />
+            <End Role="transactioninfo" EntitySet="transactioninfoes" />
+          </AssociationSet>
+          <EntitySet Name="feedbacks" EntityType="MphasisOnlineModel.feedback" />
+          <AssociationSet Name="FK__feedback__userid__04E4BC85" Association="MphasisOnlineModel.FK__feedback__userid__04E4BC85">
+            <End Role="Registration" EntitySet="Registrations" />
+            <End Role="feedback" EntitySet="feedbacks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="Boolean" />
+          <Property Name="phNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pwd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dob" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="transactioninfoes" Relationship="MphasisOnlineModel.FK__transacti__usern__5FB337D6" FromRole="Registration" ToRole="transactioninfo" />
+          <NavigationProperty Name="feedbacks" Relationship="MphasisOnlineModel.FK__feedback__userid__04E4BC85" FromRole="Registration" ToRole="feedback" />
+        </EntityType>
+        <Association Name="FK__transacti__usern__5FB337D6">
+          <End Type="MphasisOnlineModel.Registration" Role="Registration" Multiplicity="0..1" />
+          <End Type="MphasisOnlineModel.transactioninfo" Role="transactioninfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="transactioninfo">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="feedback">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pttitle" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pdescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Registration" Relationship="MphasisOnlineModel.FK__feedback__userid__04E4BC85" FromRole="feedback" ToRole="Registration" />
+        </EntityType>
+        <Association Name="FK__feedback__userid__04E4BC85">
+          <End Type="MphasisOnlineModel.Registration" Role="Registration" Multiplicity="0..1" />
+          <End Type="MphasisOnlineModel.feedback" Role="feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="feedback">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MphasisOnlineModelStoreContainer" CdmEntityContainer="MphasisOnlineEntities">
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="MphasisOnlineModel.product">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="pcode" ColumnName="pcode" />
+                <ScalarProperty Name="pname" ColumnName="pname" />
+                <ScalarProperty Name="desc" ColumnName="desc" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="pimage" ColumnName="pimage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transactioninfoes">
+            <EntityTypeMapping TypeName="MphasisOnlineModel.transactioninfo">
+              <MappingFragment StoreEntitySet="transactioninfo">
+                <ScalarProperty Name="transactionid" ColumnName="transactionid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="pcode" ColumnName="pcode" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="orderdate" ColumnName="orderdate" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="MphasisOnlineModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phNo" ColumnName="phNo" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="feedbacks">
+            <EntityTypeMapping TypeName="MphasisOnlineModel.feedback">
+              <MappingFragment StoreEntitySet="feedback">
+                <ScalarProperty Name="pdescription" ColumnName="pdescription" />
+                <ScalarProperty Name="pttitle" ColumnName="pttitle" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

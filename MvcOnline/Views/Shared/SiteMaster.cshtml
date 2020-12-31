@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Contents/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <img src="~/images/banner.jpg" width="100%" height="160px" />
+    </header>
+    <nav>
+        @Html.ActionLink("Home", "Home")
+        @Html.ActionLink("About", "About")
+        @Html.ActionLink("Register", "Register")
+        @Html.ActionLink("Products", "Product")
+        @Html.ActionLink("Buy", "Buy")
+        @Html.ActionLink("Feedback", "feedback")
+
+        @if (Session["user"] == null)
+        {
+            @Html.ActionLink("Login", "Login")
+        }
+        else
+        {
+            @Html.ActionLink("Logout", "Logout")
+        }
+    </nav>
+    <article>
+        <div>
+            @RenderBody()
+        </div>
+    </article>
+
+    <footer>
+    </footer>
+   
+</body>
+</html>

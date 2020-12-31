@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @foreach (string items in ViewBag.st)
+        {
+            <li>
+                @items
+            </li>
+        }
+        </br></br>
+
+        @foreach (string items in (String[])ViewData["names"])
+        {
+            <li>
+                @items
+            </li>
+        }
+    </div>
+</body>
+</html>

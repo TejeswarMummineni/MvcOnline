@@ -1,0 +1,22 @@
+﻿body {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+nav {
+    text-align: right;
+}
+
+a {
+    border: 2px solid red;
+    padding: 30px;
+    background-color: tomato;
+    font-size: 14px;
+    color: yellow;
+}
+
+    a:hover {
+        background-color: steelblue;
+        color: white;
+        font-weight: bold;
+    }

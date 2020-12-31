@@ -1,0 +1,24 @@
+﻿@model IEnumerable<MvcOnline.Models.product>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+
+<h2>Product</h2>
+
+@foreach (var item in Model)
+{
+    @item.pcode
+    <br />
+    @item.pname
+    <br />
+    @item.desc
+    <br />
+    @item.price
+    <br />
+    <img src="~/@item.pimage" />
+    <br />
+    @Html.ActionLink("Buy This", "Buy", new { st = item.pcode}, new { @class = "btn btn-primary" })
+    <hr />
+
+}

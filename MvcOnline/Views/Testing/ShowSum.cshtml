@@ -1,0 +1,39 @@
+﻿
+@*@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowSum</title>
+</head>
+<body>
+    <div>
+      
+        
+        @foreach (string items in ViewBag.st)
+        {
+            int a = 0, sum = 0;
+            @Convert.ToInt32(items)= a;
+            sum = sum + a;
+
+        }
+        
+        @ViewBag["res"]=sum;
+        </br></br>
+
+        @foreach (string items in (String[])ViewData["names"])
+        {
+            int a = 0, sum = 0;
+            @Convert.ToInt32(items)= a;
+sum = sum + a;
+
+}
+        @ViewData["res"]=sum;
+
+    </div>
+</body>
+</html>*@

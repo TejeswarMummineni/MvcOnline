@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+           Employee Id <input type="text" name="empid" /><br />
+           Name <input type="text" name="empname" /><br />
+           DOB <input type="date" name="dob" /><br />
+           Gender <lable><input type="radio" name="gender" value="Male" />Male </lable>
+            <label><input type="radio" name="gender" value="Female" /> Female </label><br />
+            <label> Nationality</label>
+            <select name="Nationality">
+                <option value=" Indian"> Indian </option>
+                <option value=" African"> African </option>
+                <option value=" American"> American </option>
+                <option value="Chiness"> Chiness </option>
+            </select>
+            <input type="submit" value=" register" />
+        </form>
+        <hr />
+        @ViewBag.a <br />
+        @ViewBag.b <br />
+        @ViewBag.c <br />
+        @ViewBag.d <br />
+        @ViewBag.e
+    </div>
+</body>
+</html>

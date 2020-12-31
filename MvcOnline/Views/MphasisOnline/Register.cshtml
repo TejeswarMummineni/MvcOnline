@@ -1,0 +1,58 @@
+﻿@model MvcOnline.Models.Registration
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+    <link href="~/Contents/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" />
+}
+
+<h2>Register</h2>
+<form method="post">
+    <table>
+        <tr>
+            <td>UserName</td>
+            <td> @Html.TextBoxFor(c => c.username, new { @placeholder = "Enter uname" }) </td>
+            <td>@Html.ValidationMessageFor(c => c.username) </td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>  @Html.TextBoxFor(c => c.Address)  </td>
+            <td>@Html.ValidationMessageFor(c => c.Address) </td>
+        </tr>
+
+        <tr>
+            <td>Gender</td>
+            <td>
+                Male    @Html.RadioButtonFor(c => c.gender, 1)
+                Female  @Html.RadioButtonFor(c => c.gender, 0)
+            </td>
+
+        </tr>
+        <tr>
+            <td>PhoneNumber</td>
+            <td>  @Html.TextBoxFor(c => c.phNo, new { @type = "number" }) </td>
+            <td>@Html.ValidationMessageFor(c => c.phNo )</td>
+
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>   @Html.TextBoxFor(c => c.email, new { @type = "Email" }) </td>
+            <td>@Html.ValidationMessageFor(c => c.email) </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>  @Html.PasswordFor(c => c.pwd, new { @type = "password" }) </td>
+            <td>@Html.ValidationMessageFor(c => c.pwd) </td>
+        </tr>
+        <tr>
+            <td>DOB</td>
+            <td>   @Html.TextBoxFor(c => c.dob, new { @type = "date" }) </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" class="btn-success" />  </td>
+
+        </tr>
+    </table>
+</form>
+@ViewData["a"]

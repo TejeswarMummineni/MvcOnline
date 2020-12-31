@@ -1,0 +1,25 @@
+﻿@model MvcOnline.Models.Registration
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+
+<h2>Login</h2>
+<form method="post">
+    <table>
+        <tr>
+            <td>UserName</td>
+            <td> @Html.TextBoxFor(c => c.username, new { @placeholder = "Enter uname" }) </td>
+            <td>@Html.ValidationMessageFor(c => c.username) </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>  @Html.PasswordFor(c => c.pwd) </td>
+            <td>@Html.ValidationMessageFor(c => c.pwd) </td>
+        </tr>
+        <td>
+            <input type="submit" value="Login" />
+        </td>
+    </table>
+</form>
+@ViewData["err"]

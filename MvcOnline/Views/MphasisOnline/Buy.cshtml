@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MvcOnline.Models.product>
+@{
+    ViewBag.Title = "Buy";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+
+<h2>Buy</h2>
+@if (!IsPost)
+{
+
+    foreach (var item in Model)
+    {
+        @item.pcode
+        <br />
+        @item.pname
+        <br />
+        @item.desc
+        <br />
+        @item.price
+        <br />
+        <img src="~/@item.pimage" />
+        <br />
+        <hr />
+
+    }
+
+}
+
+<form method="post">
+
+    <label>Enter Qty</label> <input type="text" name="qty" />
+
+    <input type="submit" value="Buy Now" />
+
+
+</form>
+
+@ViewData["status"]
+
